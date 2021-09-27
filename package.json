@@ -1,7 +1,7 @@
 {
-  "name": "gatsby-starter-hello-world",
+  "name": "ranker-website",
   "private": true,
-  "description": "A simplified bare-bones starter for Gatsby",
+  "description": "Ranker website",
   "version": "0.1.0",
   "license": "0BSD",
   "scripts": {
@@ -15,18 +15,22 @@
   },
   "dependencies": {
     "@fluentui/react": "^8.34.6",
+    "bootstrap": "^5.1.1",
     "gatsby": "^3.13.1",
+    "gatsby-plugin-react-helmet": "^4.14.0",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-bootstrap": "^2.0.0-rc.0",
+    "react-dom": "^17.0.1",
+    "react-helmet": "^6.1.0"
   },
   "devDependencies": {
     "prettier": "2.4.1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-hello-world"
+    "url": "https://github.com/Ranker-Team/Website"
   },
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/Ranker-Team/Website/issues"
   }
 }

@@ -6,5 +6,18 @@
 
 module.exports = {
   /* Your site config here */
-  plugins: [],
+  siteMetadata: {
+    title: 'Ranker',
+    menuLinks: [
+      {
+         name: 'Home',
+         link:'/'
+      },
+      {
+         name: 'About',
+         link: '/about'
+      }
+    ]
+  },
+  plugins: [`gatsby-plugin-react-helmet`],
 }

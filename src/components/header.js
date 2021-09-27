@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { Navbar, Container, Nav } from 'react-bootstrap';
 
 const Header = ({ siteTitle, menuLinks }) => (
-<Navbar bg="light" expand="lg">
+<Navbar bg={window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'} variant={window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'} expand="lg">
 <Container>
   <Navbar.Brand href="/">{siteTitle}</Navbar.Brand>
   <Navbar.Toggle aria-controls="basic-navbar-nav" />

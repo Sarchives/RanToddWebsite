@@ -11,7 +11,11 @@ module.exports = {
     menuLinks: [
       {
          name: 'Home',
-         link:'/'
+         link: '/'
+      },
+      {
+        name: 'Leaderboard',
+        link: '/leaderboard'
       },
       {
          name: 'About',

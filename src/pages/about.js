@@ -11,7 +11,7 @@ export default function Index() {
           <p>Ranker's author.</p>
           <h3><a href="https://github.com/dongle-the-gadget">Dongle</a></h3>
           <p>Ranker's main dev.</p>
-          <h3><a href="https://github.com/Ahmed605">Ahemd Walid</a></h3>
+          <h3><a href="https://github.com/Ahmed605">Ahmed Walid</a></h3>
           <p>Ranker's main rank card main developer.</p>
           <h3><a href="https://github.com/zeealeid">Zeealeid</a></h3>
           <p>Ranker's main rank card main designer.</p>

@@ -1,0 +1,71 @@
+.link {
+    background: none;
+    border: none;
+    color: rgb(100, 144, 185);
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+.server-banner {
+    height: 250px;
+    background: gray;
+    display: flex;
+    align-items: flex-end;
+}
+
+.padding-container {
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.actual-content {
+    background: linear-gradient(0deg, rgba(28,28,28,1) 0%, rgba(0, 0, 0, 0) 100%);
+    width: 100%;
+    min-height: 90px;
+    padding-left: 30px;
+    padding-right: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile {
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+    background-color: #fff;
+}
+
+.leaderboard-server-name {
+    color: white;
+    margin-top: 10px;
+}
+
+.paragraph {
+    color: #fff;
+}
+
+#customize-rank-card {
+    color: rgb(137, 187, 235);
+}
+
+@media (max-width: 850px) {
+    .actual-content {
+        display: block;
+        padding-bottom: 10px;
+    }
+
+    #customize-rank-card {
+        color: rgb(116, 168, 216);
+    }
+
+    #leaderboard-join-server {
+        margin-top: 0px !important;
+    }
+
+    #leaderboard-server-options {
+        display: flex;
+        justify-content: center;
+    }
+} 

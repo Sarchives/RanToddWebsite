@@ -24,7 +24,9 @@ const Layout = ({ children }) => {
 
     return (
         <>
-        <Helmet>
+        <Helmet bodyAttributes={{
+            class: window.matchMedia('(prefers-color-scheme: dark)').matches ? 'bg-dark text-light' : ''
+        }}>
             <meta charSet="utf-8" />
                 <title>{data.site.siteMetadata.menuLinks.filter(x => window.location.pathname === x.link)[0].name} - {data.site.siteMetadata.title}</title>
             </Helmet>

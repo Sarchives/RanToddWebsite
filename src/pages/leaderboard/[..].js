@@ -1,11 +1,15 @@
 import React from "react"
-import Layout from "../components/layout"
+import { Helmet } from "react-helmet"
+import Layout from "../../components/layout"
 import { PrimaryButton } from '@fluentui/react/lib/Button'
-import '../styles/CustomStyles.css'
+import '../../styles/CustomStyles.css'
 
-export default function Leaderboard() {
+export default function Index() {
   return (
     <Layout>
+        <Helmet>
+                <title>Lol - {}</title>
+            </Helmet>
     <div className="server-banner">
         <div className="actual-content">
           <div style={{display: "flex"}}>

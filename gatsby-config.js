@@ -8,6 +8,7 @@ module.exports = {
   /* Your site config here */
   siteMetadata: {
     title: 'Ranker',
+    titleTemplate: "%s - Ranker",
     menuLinks: [
       {
          name: 'Home',

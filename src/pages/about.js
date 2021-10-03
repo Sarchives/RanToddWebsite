@@ -1,9 +1,11 @@
 import React from "react"
 import Layout from "../components/layout"
+import SEO from '../components/seo'
 
 export default function Index() {
   return (
     <Layout>
+      <SEO title="About" />
       <div className="my-4">
         <h2 class="text-center">Who are we?</h2>
         <div className="padding-container">

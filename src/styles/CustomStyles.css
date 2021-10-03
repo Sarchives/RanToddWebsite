@@ -1,3 +1,7 @@
+.container-fluid {
+    cursor: default; /* lol */
+}
+
 .link {
     background: none;
     border: none;
@@ -55,11 +59,15 @@
     border-radius: 10px;
     display: flex;
     align-items: center;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 25px;
+    padding-bottom: 25px;
     position: relative;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
-    cursor: default;
+}
+
+.bg-dark .playerItem {
+    background-color: black;
+    color: white;
 }
 
 .rankCircle {
@@ -68,6 +76,7 @@
     width: 36px;
     height: 36px;
     margin-left: 10px;
+    color: black;
 }
 
 .rankCircle > h4 {
@@ -128,6 +137,26 @@
     top: 50%;
     transform: translateY(-50%);
     right: 0;
+}
+
+.roles {
+    background-color: #F1F1F1;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
+    margin-right: 2rem;
+    padding: 20px;
+}
+
+.bg-dark .roles {
+    background-color: black;
+    color: white;
+}
+
+.role {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px;
+    display: inline-block;
 }
 
 @media (max-width: 850px) {

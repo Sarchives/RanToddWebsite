@@ -69,6 +69,7 @@ export default function Index() {
 if (!isLoaded) {
     return (
     <Layout>
+      <SEO title="Loading" />
         <ProgressIndicator />
     </Layout>
         )
@@ -98,10 +99,11 @@ if (!isLoaded) {
           </div>
         </div>
     </div>
-    <div className="mt-5 ms-3" id="players">
+    <div className="row">
+    <div className="mt-5 ms-3 col-9 players">
     {result.players?.map((player, i) => {
         const rank = i + 1;
-        return (<div key={i} className="playerItem w-75 mb-3">
+        return (<div key={i} className="playerItem mb-3">
             <div className={"rankCircle " + (rank === 1 ? "gold" : rank === 2 ? "silver" : rank === 3 ? "bronce" : "normal")}>
                 <h4>{rank}</h4>
             </div>
@@ -125,6 +127,11 @@ if (!isLoaded) {
             </div>
             </div>)
          })}
+    </div>
+    <div className="mt-5 ms-3 col roles">
+         <h4>Role rewards</h4>
+         {result.roles.map((role, i) => <h6 key={i} className="role">Level {role.level} - {role.roleId}</h6>)}
+    </div>
     </div>
     <Dialog
         hidden={hideDialog}

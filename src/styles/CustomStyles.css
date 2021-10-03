@@ -50,6 +50,86 @@
     color: rgb(137, 187, 235);
 }
 
+.playerItem {
+    background-color: #F1F1F1;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    position: relative;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
+    cursor: default;
+}
+
+.rankCircle {
+    display: inline-block;
+    border-radius: 100%;
+    width: 36px;
+    height: 36px;
+    margin-left: 10px;
+}
+
+.rankCircle > h4 {
+    text-align: center;
+    line-height: 36px;
+}
+
+.gold {
+    background-color: #FFB74B;
+}
+
+.silver {
+    background-color: #D4D4D4;
+}
+
+.bronce {
+    background-color: #705227;
+    color: white;
+}
+
+.normal {
+    background-color: #F9F9F9;
+}
+
+.avatar {
+    border-radius: 100%;
+    width: 36px;
+    height: 36px;
+    margin-left: 10px;
+}
+
+.username {
+    position: absolute; /* Would he say he's in L-O-V-E? Well if it was me then I would. I would! */
+    margin-left: 102px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.right {
+    position: absolute; 
+    right: 0;
+}
+
+.boxy {
+    text-align: center;
+    float: left;
+    margin-right: 10px;
+}
+
+.preSpinner {
+    margin-right: 85px;
+}
+
+.spinner {
+    width: 65px;
+    height: 65px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+}
+
 @media (max-width: 850px) {
     .actual-content {
         display: block;

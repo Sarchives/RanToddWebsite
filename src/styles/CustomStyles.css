@@ -100,7 +100,7 @@
 }
 
 .username {
-    position: absolute; /* Would he say he's in L-O-V-E? Well if it was me then I would. I would! */
+    position: absolute;
     margin-left: 102px;
     top: 50%;
     transform: translateY(-50%);

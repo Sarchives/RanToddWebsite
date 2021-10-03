@@ -105,7 +105,7 @@ if (!isLoaded) {
             <div className={"rankCircle " + (rank === 1 ? "gold" : rank === 2 ? "silver" : rank === 3 ? "bronce" : "normal")}>
                 <h4>{rank}</h4>
             </div>
-            <img className="avatar" src={player.avatar} alt={player.username}></img>
+            <img className="avatar" src={player.avatar.split("=")[0] + "=64"} alt={player.username}></img>
             <h4 className="username">{player.username}</h4>
             <div className="right">
                 <div className="boxy"> 

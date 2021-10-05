@@ -16,7 +16,6 @@ export default function Index() {
     .then(res => res.json())
     .then(result => {
         setResult(result)
-        console.log(result);
         setIsLoaded(true)
       }
     )

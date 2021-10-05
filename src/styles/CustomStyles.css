@@ -2,6 +2,48 @@
     cursor: default; /* lol */
 }
 
+.navbar-nav {
+    width: 100%;
+}
+
+.antiButton {
+    background: none;
+    border: none;
+    cursor: default !important; /* Hate doing this but ok */
+}
+
+.avatarMenu {
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+}
+
+.leaderboardLink {
+    display: inline-block;
+    background-color: #F1F1F1;
+    color: black;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
+    margin-right: 2rem;
+    padding: 20px;
+    text-decoration: none;
+    cursor: default;
+}
+
+.leaderboardLink:hover {
+    color: black; /* You may think, why is this here? I don't know either but I had to add it */
+    opacity: 80%;
+}
+
+.leaderboardLink > div.profile {
+    display: inline-block;
+}
+
+.bg-dark .leaderboardLink {
+    background-color: #4A4A4A;
+    color: white;
+}
+
 .link {
     background: none;
     border: none;
@@ -38,7 +80,13 @@
     border-radius: 50%;
     height: 60px;
     width: 60px;
-    background-color: #fff;
+    background-color: white;
+}
+
+.profile > h3 {
+    color: black;
+    text-align: center;
+    line-height: 60px;
 }
 
 .leaderboard-server-name {
@@ -47,7 +95,7 @@
 }
 
 .paragraph {
-    color: #fff;
+    color: white;
 }
 
 #customize-rank-card {
@@ -66,7 +114,7 @@
 }
 
 .bg-dark .playerItem {
-    background-color: black;
+    background-color: #4A4A4A;
     color: white;
 }
 
@@ -148,7 +196,7 @@
 }
 
 .bg-dark .roles {
-    background-color: black;
+    background-color: #4A4A4A;
     color: white;
 }
 

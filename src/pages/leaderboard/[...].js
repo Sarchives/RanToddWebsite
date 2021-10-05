@@ -1,19 +1,21 @@
-import React, { createRef, useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import Layout from "../../components/layout"
 import { PrimaryButton, DefaultButton } from '@fluentui/react/lib/Button'
 import { ProgressIndicator } from '@fluentui/react/lib/ProgressIndicator'
-import { Dialog, DialogType, DialogFooter } from '@fluentui/react/lib/Dialog';
-import { ChoiceGroup } from '@fluentui/react/lib/ChoiceGroup';
-import { useBoolean } from '@fluentui/react-hooks';
-import { CircularProgressbarWithChildren } from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css';
+import { Dialog, DialogType, DialogFooter } from '@fluentui/react/lib/Dialog'
+import { ChoiceGroup } from '@fluentui/react/lib/ChoiceGroup'
+import { useBoolean } from '@fluentui/react-hooks'
+import { CircularProgressbarWithChildren } from 'react-circular-progressbar'
+import 'react-circular-progressbar/dist/styles.css'
 import '../../styles/CustomStyles.css'
-import SEO from '../../components/seo';
+import SEO from '../../components/seo'
 import { navigate } from "@reach/router"
 
 export default function Index() {
     const [isLoaded, setIsLoaded] = useState(false);
     const [result, setResult] = useState([]);
+    const [selectedKey, setSelectedKey] = useState("A");
+    const [defaultSelectedKey, setDefaultSelectedKey] = useState("A");
     let page = 0;
     let scrollDone = true;
 
@@ -36,6 +38,16 @@ export default function Index() {
   const [hideDialog, { toggle: toggleHideDialog }] = useBoolean(true);
 
     useEffect(() => {
+      fetch("https:/localhost:5001/style/" + window.location.pathname.split("/")[2], {
+        headers: {
+          "Code": localStorage.getItem("token")
+        }})
+      .then(res => res.json())
+      .then(result => {
+          setDefaultSelectedKey(result.fleuron ? "B" : "A");
+        }
+      )
+
   fetch("https:/localhost:5001/levels/" + window.location.pathname.split("/")[2] + "?page=" + page)
     .then(res => res.json())
     .then(result => {
@@ -66,6 +78,8 @@ export default function Index() {
     })
 
 }, [])
+
+
 if (!isLoaded) {
     return (
     <Layout>
@@ -80,7 +94,7 @@ if (!isLoaded) {
     <div className="server-banner">
         <div className="actual-content">
           <div style={{display: "flex"}}>
-            <img alt="Server icon" className="profile" src={"https://cdn.discordapp.com/icons/" + window.location.pathname.split("/")[2] + "/" + result.guild.icon + ".png?size=64"}></img>
+          {result.guild.icon ? <img alt="Server icon" className="profile" src={"https://cdn.discordapp.com/icons/" + window.location.pathname.split("/")[2] + "/" + result.guild.icon + ".png?size=64"}></img> : <div className="profile"><h3>{result.guild.name.split("")[0]}</h3></div>}
             <div style={{marginLeft: "20px"}}>
               <h4 className="leaderboard-server-name">{result.guild.name}</h4>
               <p className="paragraph" style={{maxWidth: '600px'}}>{result.guild.description ?? <i>No description</i>}</p>
@@ -130,7 +144,7 @@ if (!isLoaded) {
     </div>
     <div className="mt-5 ms-3 col roles">
          <h4>Role rewards</h4>
-         {result.roles.map((role, i) => <h6 key={i} className="role">Level {role.level} - {role.roleId}</h6>)}
+         {result.roles.map((role, i) => <h6 key={i} className="role">Level {role.level} - {role.roleName}</h6>)}
     </div>
     </div>
     <Dialog
@@ -139,9 +153,23 @@ if (!isLoaded) {
         dialogContentProps={dialogContentProps}
         modalProps={modelProps}
       >
-        <ChoiceGroup defaultSelectedKey="A" options={options} />
+        <ChoiceGroup defaultSelectedKey={defaultSelectedKey} options={options} onChange={event => setSelectedKey(event.target.id.slice(event.target.id.length - 1))} />
         <DialogFooter>
-          <PrimaryButton onClick={toggleHideDialog} text="Save" />
+          <PrimaryButton onClick={() => {
+            fetch("https:/localhost:5001/style/" + window.location.pathname.split("/")[2], {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Code': localStorage.getItem('token')
+              },
+              body: JSON.stringify({ fleuron: selectedKey !== "A" })
+            })
+            .then(res => res.json())
+            .then(result => {
+                setDefaultSelectedKey(result.fleuron ? "B" : "A");
+              })
+            toggleHideDialog()
+          }} text="Save" />
           <DefaultButton onClick={toggleHideDialog} text="Cancel" />
         </DialogFooter>
       </Dialog>

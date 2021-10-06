@@ -6,7 +6,7 @@
    
    The resulting `.env` file might look like this:
    ```js
-      GATSBY_API_URL=<insert url for api here>
+   GATSBY_API_URL=<insert url for api here>
    ```
 3. Open a command line window and `cd` to Website. Make sure that `package.json` exists in the selected folder.
 4. Execute `gatsby build` and wait for the build to finish.

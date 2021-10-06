@@ -1,11 +1,11 @@
 import React from "react"
 import Layout from "../components/layout"
-import SEO from '../components/seo'
+import Seo from '../components/seo'
 
 export default function Index() {
   return (
     <Layout>
-      <SEO title="About" />
+      <Seo title="About" />
       <div className="my-4">
         <h2 class="text-center">Who are we?</h2>
         <div className="padding-container">
@@ -21,6 +21,8 @@ export default function Index() {
           <p>Ranker's main rank card design collaborators.</p>
           <h3><a href="https://discord.com/users/188482204601548800">Fleuron</a></h3>
           <p>Ranker's second rank card designer.</p>
+          <h3><a href="https://github.com/Erisa">Erisa</a></h3>
+          <p>Initial Docker support.</p>
         </div>
       </div>
     </Layout>

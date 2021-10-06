@@ -1,3 +1,53 @@
+.container-fluid {
+    cursor: default; /* lol */
+}
+
+.row {
+    width: 100%;
+}
+
+.navbar-nav {
+    width: 100%;
+}
+
+.antiButton {
+    background: none;
+    border: none;
+    cursor: default !important;
+}
+
+.avatarMenu {
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+}
+
+.leaderboardLink {
+    display: inline-block;
+    background-color: #F1F1F1;
+    color: black;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
+    margin-right: 2rem;
+    padding: 20px;
+    text-decoration: none;
+    cursor: default;
+}
+
+.leaderboardLink:hover {
+    color: black; /* You may think, why is this here? I don't know either but I had to add it */
+    opacity: 80%;
+}
+
+.leaderboardLink > div.profile {
+    display: inline-block;
+}
+
+.bg-dark .leaderboardLink {
+    background-color: #4A4A4A;
+    color: white;
+}
+
 .link {
     background: none;
     border: none;
@@ -34,7 +84,13 @@
     border-radius: 50%;
     height: 60px;
     width: 60px;
-    background-color: #fff;
+    background-color: white;
+}
+
+.profile > h3 {
+    color: black;
+    text-align: center;
+    line-height: 60px;
 }
 
 .leaderboard-server-name {
@@ -43,7 +99,7 @@
 }
 
 .paragraph {
-    color: #fff;
+    color: white;
 }
 
 #customize-rank-card {
@@ -55,11 +111,15 @@
     border-radius: 10px;
     display: flex;
     align-items: center;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 25px;
+    padding-bottom: 25px;
     position: relative;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
-    cursor: default;
+}
+
+.bg-dark .playerItem {
+    background-color: #4A4A4A;
+    color: white;
 }
 
 .rankCircle {
@@ -68,6 +128,7 @@
     width: 36px;
     height: 36px;
     margin-left: 10px;
+    color: black;
 }
 
 .rankCircle > h4 {
@@ -130,6 +191,27 @@
     right: 0;
 }
 
+.roles {
+    width: 100%;
+    background-color: #F1F1F1;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
+    padding: 20px;
+    margin-bottom: 1rem;
+}
+
+.bg-dark .roles {
+    background-color: #4A4A4A;
+    color: white;
+}
+
+.role {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px;
+    display: inline-block;
+}
+
 @media (max-width: 850px) {
     .actual-content {
         display: block;
@@ -147,5 +229,17 @@
     #leaderboard-server-options {
         display: flex;
         justify-content: center;
+    }
+
+    .players {
+        width: 100%;
+    }
+    
+    .right {
+        display: none;
+    }
+
+    .roles {
+        margin-left: 1.5rem !important;
     }
 } 

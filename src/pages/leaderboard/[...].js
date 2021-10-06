@@ -114,6 +114,10 @@ if (!isLoaded) {
         </div>
     </div>
     <div className="row">
+    <div className="mt-5 ms-3 col roles">
+         <h4>Role rewards</h4>
+         {result.roles.map((role, i) => <h6 key={i} className="role">Level {role.level} - {role.roleName}</h6>)}
+    </div>
     <div className="mt-5 ms-3 col-9 players">
     {result.players?.map((player, i) => {
         const rank = i + 1;
@@ -141,10 +145,6 @@ if (!isLoaded) {
             </div>
             </div>)
          })}
-    </div>
-    <div className="mt-5 ms-3 col roles">
-         <h4>Role rewards</h4>
-         {result.roles.map((role, i) => <h6 key={i} className="role">Level {role.level} - {role.roleName}</h6>)}
     </div>
     </div>
     <Dialog

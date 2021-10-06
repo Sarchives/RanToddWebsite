@@ -1,36 +1,36 @@
-import React, { useEffect, useState } from "react"
-import PropTypes from "prop-types"
+import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import { Navbar, Container, Nav } from 'react-bootstrap'
 import { PrimaryButton, DefaultButton } from '@fluentui/react/lib/Button'
 import { Dialog, DialogType, DialogFooter } from '@fluentui/react/lib/Dialog'
 import { useBoolean } from '@fluentui/react-hooks'
-import { navigate } from "gatsby-link"
+import { navigate } from 'gatsby-link'
 
 const Header = ({ siteTitle, menuLinks }) => {
-  const [loggedInUser, setLoggedInUser] = useState(undefined);
+  const [loggedInUser, setLoggedInUser] = useState(undefined)
 
   const modelProps = {
     isBlocking: false,
     styles: { main: { maxWidth: 450 } },
-  };
+  }
   const dialogContentProps = {
     type: DialogType.normal,
     title: 'Sign out?',
     subText: 'Signing out will disable some features until you sign in again.',
-  };
+  }
 
-  const [hideDialog, { toggle: toggleHideDialog }] = useBoolean(true);
+  const [hideDialog, { toggle: toggleHideDialog }] = useBoolean(true)
 
   useEffect(() => {
-  if(localStorage.getItem("token")) {
-  fetch("https://discord.com/api/v9/users/@me", {
+  if(localStorage.getItem('token')) {
+  fetch('https://discord.com/api/v9/users/@me', {
     headers: {
-      "Authorization": "Bearer " + localStorage.getItem("token")
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
     }
   })
             .then(res => res.json())
             .then(result => {
-                setLoggedInUser(result);
+                setLoggedInUser(result)
               }
             )
             }
@@ -80,7 +80,7 @@ Header.propTypes = {
 }
 
 Header.defaultProps = {
-  siteTitle: ``,
+  siteTitle: '',
 }
 
 export default Header

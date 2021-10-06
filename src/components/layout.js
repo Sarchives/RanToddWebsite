@@ -1,8 +1,8 @@
-import React from "react"
-import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
+import React from 'react'
+import PropTypes from 'prop-types'
+import { useStaticQuery, graphql } from 'gatsby'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Header from "./header"
+import Header from './header'
 
 const Layout = ({ children}) => {
     const data = useStaticQuery(graphql`
@@ -25,11 +25,11 @@ const Layout = ({ children}) => {
             <div className="container-fluid">{children}</div>
             {window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
               if(e.matches) {
-              document.body.classList = "bg-dark text-light";
-              document.getElementById("navbar").classList = "navbar navbar-expand-lg navbar-dark bg-dark";
+              document.body.classList = 'bg-dark text-light'
+              document.getElementById('navbar').classList = 'navbar navbar-expand-lg navbar-dark bg-dark'
               } else {
-                document.body.classList = "";
-                document.getElementById("navbar").classList = "navbar navbar-expand-lg navbar-light bg-light";
+                document.body.classList = ''
+                document.getElementById('navbar').classList = 'navbar navbar-expand-lg navbar-light bg-light'
               }
             })}
         </>

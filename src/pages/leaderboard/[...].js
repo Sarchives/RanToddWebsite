@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react"
-import Layout from "../../components/layout"
+import React, { useEffect, useState } from 'react'
+import Layout from '../../components/layout'
 import { PrimaryButton, DefaultButton } from '@fluentui/react/lib/Button'
 import { ProgressIndicator } from '@fluentui/react/lib/ProgressIndicator'
 import { Dialog, DialogType, DialogFooter } from '@fluentui/react/lib/Dialog'
@@ -9,71 +9,71 @@ import { CircularProgressbarWithChildren } from 'react-circular-progressbar'
 import 'react-circular-progressbar/dist/styles.css'
 import '../../styles/CustomStyles.css'
 import Seo from '../../components/seo'
-import { navigate } from "@reach/router"
+import { navigate } from '@reach/router'
 
 export default function Index() {
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [result, setResult] = useState([]);
-    const [selectedKey, setSelectedKey] = useState("A");
-    const [defaultSelectedKey, setDefaultSelectedKey] = useState("A");
-    let page = 0;
-    let scrollDone = true;
+    const [isLoaded, setIsLoaded] = useState(false)
+    const [result, setResult] = useState([])
+    const [selectedKey, setSelectedKey] = useState('A')
+    const [defaultSelectedKey, setDefaultSelectedKey] = useState('A')
+    let page = 0
+    let scrollDone = true
 
 
   const options = [
     { key: 'A', text: "Zeealeid's style" },
     { key: 'B', text: "Flueron's style" },
-  ];
+  ]
 
   const modelProps = {
     isBlocking: false,
     styles: { main: { maxWidth: 450 } },
-  };
+  }
   const dialogContentProps = {
     type: DialogType.largeHeader,
     title: 'Select your style',
     subText: 'Two people lead the creation of our rank cards. Here you can select one.',
-  };
+  }
 
-  const [hideDialog, { toggle: toggleHideDialog }] = useBoolean(true);
+  const [hideDialog, { toggle: toggleHideDialog }] = useBoolean(true)
 
     useEffect(() => {
-      fetch(process.env.GATSBY_API_URL + "/style/" + window.location.pathname.split("/")[2], {
+      fetch(process.env.GATSBY_API_URL + '/style/' + window.location.pathname.split('/')[2], {
         headers: {
-          "Code": localStorage.getItem("token")
+          'Code': localStorage.getItem('token')
         }})
       .then(res => res.json())
       .then(result => {
-          setDefaultSelectedKey(result.fleuron ? "B" : "A");
+          setDefaultSelectedKey(result.fleuron ? 'B' : 'A')
         }
       )
 
-  fetch(process.env.GATSBY_API_URL + "/levels/" + window.location.pathname.split("/")[2] + "?page=" + page)
+  fetch(process.env.GATSBY_API_URL + '/levels/' + window.location.pathname.split('/')[2] + '?page=' + page)
     .then(res => res.json())
     .then(result => {
-        setResult(result);
-        page++;
-        setIsLoaded(true);
+        setResult(result)
+        page++
+        setIsLoaded(true)
       }
     )
 
-    window.addEventListener("scroll", () => {
+    window.addEventListener('scroll', () => {
         if((window.innerHeight + window.scrollY) >= document.body.offsetHeight && scrollDone) {
-            scrollDone = false;
-            fetch(process.env.GATSBY_API_URL + "/levels/" + window.location.pathname.split("/")[2] + "?page=" + page)
+            scrollDone = false
+            fetch(process.env.GATSBY_API_URL + '/levels/' + window.location.pathname.split('/')[2] + '?page=' + page)
     .then(res => res.json())
     .then(result => {
         if(result.players) {
         setResult(oldResults => {
-            let newResults = Object.assign({}, oldResults);
-            newResults.players = newResults.players.concat(result.players);
-            return newResults;
-        });
-        page++;
+            let newResults = Object.assign({}, oldResults)
+            newResults.players = newResults.players.concat(result.players)
+            return newResults
+        })
+        page++
     }
       }
     )
-    scrollDone = true;
+    scrollDone = true
         }
     })
 
@@ -94,16 +94,16 @@ if (!isLoaded) {
     <div className="server-banner">
         <div className="actual-content">
           <div style={{display: "flex"}}>
-          {result.guild.icon ? <img alt="Server icon" className="profile" src={"https://cdn.discordapp.com/icons/" + window.location.pathname.split("/")[2] + "/" + result.guild.icon + ".png?size=64"}></img> : <div className="profile"><h3>{result.guild.name.split("")[0]}</h3></div>}
-            <div style={{marginLeft: "20px"}}>
+          {result.guild.icon ? <img alt="Server icon" className="profile" src={'https://cdn.discordapp.com/icons/' + window.location.pathname.split('/')[2] + '/' + result.guild.icon + '.png?size=64'}></img> : <div className="profile"><h3>{result.guild.name.split('')[0]}</h3></div>}
+            <div style={{marginLeft: '20px'}}>
               <h4 className="leaderboard-server-name">{result.guild.name}</h4>
               <p className="paragraph" style={{maxWidth: '600px'}}>{result.guild.description ?? <i>No description</i>}</p>
             </div>
           </div>
           <div id="leaderboard-server-options">
-            <button id="customize-rank-card" style={{marginRight: "10px"}} className="link" onClick={toggleHideDialog}>Customize your rank card</button>
-            {result.guild.is_joinable && <PrimaryButton id="leaderboard-join-server" text="Join server" style={{marginTop: "25px"}} onClick={() => {
-                fetch(process.env.GATSBY_API_URL + "/invite/" + window.location.pathname.split("/")[2])
+            <button id="customize-rank-card" style={{marginRight: '10px'}} className="link" onClick={toggleHideDialog}>Customize your rank card</button>
+            {result.guild.is_joinable && <PrimaryButton id="leaderboard-join-server" text="Join server" style={{marginTop: '25px'}} onClick={() => {
+                fetch(process.env.GATSBY_API_URL + '/invite/' + window.location.pathname.split('/')[2])
                 .then(res => res.json())
                 .then(result => {
                     navigate(result.url)
@@ -120,12 +120,12 @@ if (!isLoaded) {
     </div>
     <div className="mt-5 ms-3 col-9 players">
     {result.players?.map((player, i) => {
-        const rank = i + 1;
+        const rank = i + 1
         return (<div key={i} className="playerItem mb-3">
-            <div className={"rankCircle " + (rank === 1 ? "gold" : rank === 2 ? "silver" : rank === 3 ? "bronce" : "normal")}>
+            <div className={'rankCircle ' + (rank === 1 ? 'gold' : rank === 2 ? 'silver' : rank === 3 ? 'bronce' : 'normal')}>
                 <h4>{rank}</h4>
             </div>
-            <img className="avatar" src={player.avatar.split("=")[0] + "=64"} alt={player.username}></img>
+            <img className="avatar" src={player.avatar.split('=')[0] + '=64'} alt={player.username}></img>
             <h4 className="username">{player.username}</h4>
             <div className="right">
                 <div className="boxy"> 
@@ -156,17 +156,17 @@ if (!isLoaded) {
         <ChoiceGroup defaultSelectedKey={defaultSelectedKey} options={options} onChange={event => setSelectedKey(event.target.id.slice(event.target.id.length - 1))} />
         <DialogFooter>
           <PrimaryButton onClick={() => {
-            fetch(process.env.GATSBY_API_URL + "/style/" + window.location.pathname.split("/")[2], {
+            fetch(process.env.GATSBY_API_URL + '/style/' + window.location.pathname.split('/')[2], {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
                 'Code': localStorage.getItem('token')
               },
-              body: JSON.stringify({ fleuron: selectedKey !== "A" })
+              body: JSON.stringify({ fleuron: selectedKey !== 'A' })
             })
             .then(res => res.json())
             .then(result => {
-                setDefaultSelectedKey(result.fleuron ? "B" : "A");
+                setDefaultSelectedKey(result.fleuron ? 'B' : 'A')
               })
             toggleHideDialog()
           }} text="Save" />

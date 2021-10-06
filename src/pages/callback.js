@@ -1,14 +1,15 @@
 import React, { useEffect } from "react"
 import Layout from "../components/layout"
 import '../styles/CustomStyles.css'
-import SEO from '../components/seo'
+import Seo from '../components/seo'
 import { ProgressIndicator } from '@fluentui/react/lib/ProgressIndicator'
 import { navigate } from "gatsby-link"
 
 export default function Index() {
+
     useEffect(() => {
         const params = new URLSearchParams(window.location.search.substring(1));
-        fetch("https:/localhost:5001/token", {
+        fetch(process.env.GATSBY_API_URL + "/token", {
             headers: {
               "Code": params.get("code")
             }})
@@ -26,7 +27,7 @@ export default function Index() {
 
   return (
     <Layout>
-      <SEO title="Please wait" />
+      <Seo title="Please wait" />
       <ProgressIndicator />
     </Layout>
   )

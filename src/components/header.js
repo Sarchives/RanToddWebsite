@@ -48,7 +48,7 @@ return (<Navbar id="navbar" bg={window.matchMedia('(prefers-color-scheme: dark)'
     ))}
     <button className="ms-auto antiButton" onClick={() => {
       if(!loggedInUser) {
-        navigate("https://discord.com/api/oauth2/authorize?client_id=889281672988749855&redirect_uri=http%3A%2F%2Flocalhost%3A8000%2Fcallback&response_type=code&scope=guilds%20identify")
+        navigate("https://discord.com/api/oauth2/authorize?client_id=889281672988749855&redirect_uri=" + encodeURIComponent(window.location.origin + "/") + "callback&response_type=code&scope=guilds%20identify")
       } else {
         toggleHideDialog()
       }

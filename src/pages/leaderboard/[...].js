@@ -8,7 +8,7 @@ import { useBoolean } from '@fluentui/react-hooks'
 import { CircularProgressbarWithChildren } from 'react-circular-progressbar'
 import 'react-circular-progressbar/dist/styles.css'
 import '../../styles/CustomStyles.css'
-import SEO from '../../components/seo'
+import Seo from '../../components/seo'
 import { navigate } from "@reach/router"
 
 export default function Index() {
@@ -38,7 +38,7 @@ export default function Index() {
   const [hideDialog, { toggle: toggleHideDialog }] = useBoolean(true);
 
     useEffect(() => {
-      fetch("https:/localhost:5001/style/" + window.location.pathname.split("/")[2], {
+      fetch(process.env.GATSBY_API_URL + "/style/" + window.location.pathname.split("/")[2], {
         headers: {
           "Code": localStorage.getItem("token")
         }})
@@ -48,7 +48,7 @@ export default function Index() {
         }
       )
 
-  fetch("https:/localhost:5001/levels/" + window.location.pathname.split("/")[2] + "?page=" + page)
+  fetch(process.env.GATSBY_API_URL + "/levels/" + window.location.pathname.split("/")[2] + "?page=" + page)
     .then(res => res.json())
     .then(result => {
         setResult(result);
@@ -60,7 +60,7 @@ export default function Index() {
     window.addEventListener("scroll", () => {
         if((window.innerHeight + window.scrollY) >= document.body.offsetHeight && scrollDone) {
             scrollDone = false;
-            fetch("https:/localhost:5001/levels/" + window.location.pathname.split("/")[2] + "?page=" + page)
+            fetch(process.env.GATSBY_API_URL + "/levels/" + window.location.pathname.split("/")[2] + "?page=" + page)
     .then(res => res.json())
     .then(result => {
         if(result.players) {
@@ -83,14 +83,14 @@ export default function Index() {
 if (!isLoaded) {
     return (
     <Layout>
-      <SEO title="Loading" />
+      <Seo title="Loading" />
         <ProgressIndicator />
     </Layout>
         )
   } else {
   return (
     <Layout>
-        <SEO title={result.guild.name} />
+        <Seo title={result.guild.name} />
     <div className="server-banner">
         <div className="actual-content">
           <div style={{display: "flex"}}>
@@ -103,7 +103,7 @@ if (!isLoaded) {
           <div id="leaderboard-server-options">
             <button id="customize-rank-card" style={{marginRight: "10px"}} className="link" onClick={toggleHideDialog}>Customize your rank card</button>
             {result.guild.is_joinable && <PrimaryButton id="leaderboard-join-server" text="Join server" style={{marginTop: "25px"}} onClick={() => {
-                fetch("https:/localhost:5001/invite/" + window.location.pathname.split("/")[2])
+                fetch(process.env.GATSBY_API_URL + "/invite/" + window.location.pathname.split("/")[2])
                 .then(res => res.json())
                 .then(result => {
                     navigate(result.url)
@@ -156,7 +156,7 @@ if (!isLoaded) {
         <ChoiceGroup defaultSelectedKey={defaultSelectedKey} options={options} onChange={event => setSelectedKey(event.target.id.slice(event.target.id.length - 1))} />
         <DialogFooter>
           <PrimaryButton onClick={() => {
-            fetch("https:/localhost:5001/style/" + window.location.pathname.split("/")[2], {
+            fetch(process.env.GATSBY_API_URL + "/style/" + window.location.pathname.split("/")[2], {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',

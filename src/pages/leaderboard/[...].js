@@ -39,6 +39,8 @@ export default function Index() {
   const [hideDialog, { toggle: toggleHideDialog }] = useBoolean(true)
 
     useEffect(() => {
+
+      if(localStorage.getItem('token')) {
       fetch(process.env.GATSBY_API_URL + '/style/' + window.location.pathname.split('/')[2], {
         headers: {
           'Code': localStorage.getItem('token')
@@ -49,6 +51,7 @@ export default function Index() {
           setDefaultSelectedKey(result.fleuron ? 'B' : 'A')
         }
       )
+      }
 
   fetch(process.env.GATSBY_API_URL + '/levels/' + window.location.pathname.split('/')[2] + '?page=' + page)
     .then(res => res.json())

@@ -74,6 +74,8 @@ return (<Navbar id="navbar" bg={window.matchMedia('(prefers-color-scheme: dark)'
         </DialogFooter>
       </Dialog>
 </Navbar>)
+          } else {
+            return null;
           }
 }
 

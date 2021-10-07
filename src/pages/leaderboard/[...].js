@@ -23,7 +23,7 @@ export default function Index() {
 
   const options = [
     { key: 'A', text: "Zeealeid's style" },
-    { key: 'B', text: "Flueron's style" },
+    { key: 'B', text: "Fleuron's style" },
   ]
 
   const modelProps = {

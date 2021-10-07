@@ -14,6 +14,7 @@ import { navigate } from '@reach/router'
 export default function Index() {
     const [isLoaded, setIsLoaded] = useState(false)
     const [result, setResult] = useState([])
+    const [loggedIn, setLoggedIn] = useState(false)
     const [selectedKey, setSelectedKey] = useState('A')
     const [defaultSelectedKey, setDefaultSelectedKey] = useState('A')
     let page = 0
@@ -44,6 +45,7 @@ export default function Index() {
         }})
       .then(res => res.json())
       .then(result => {
+          setLoggedIn(true)
           setDefaultSelectedKey(result.fleuron ? 'B' : 'A')
         }
       )
@@ -101,7 +103,7 @@ if (!isLoaded) {
             </div>
           </div>
           <div id="leaderboard-server-options">
-            <button id="customize-rank-card" style={{marginRight: '10px'}} className="link" onClick={toggleHideDialog}>Customize your rank card</button>
+            {loggedIn && <button id="customize-rank-card" style={{marginRight: '10px'}} className="link" onClick={toggleHideDialog}>Customize your rank card</button>}
             {result.guild.is_joinable && <PrimaryButton id="leaderboard-join-server" text="Join server" style={{marginTop: '25px'}} onClick={() => {
                 fetch(process.env.GATSBY_API_URL + '/invite/' + window.location.pathname.split('/')[2])
                 .then(res => res.json())

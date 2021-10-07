@@ -63,6 +63,29 @@
     background: gray;
     display: flex;
     align-items: flex-end;
+    position: relative;
+    background-size: cover;
+}
+
+.changeBanner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    width: 30px;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 7.5px;
+    display: none;
+}
+
+.leftButton {
+    left: 48%;
+}
+
+.server-banner:hover .changeBanner {
+    display: inline-block;
 }
 
 .padding-container {

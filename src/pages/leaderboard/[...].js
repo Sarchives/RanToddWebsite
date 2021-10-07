@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { createRef, useEffect, useState } from 'react'
 import Layout from '../../components/layout'
 import { PrimaryButton, DefaultButton } from '@fluentui/react/lib/Button'
 import { ProgressIndicator } from '@fluentui/react/lib/ProgressIndicator'
@@ -15,8 +15,10 @@ export default function Index() {
     const [isLoaded, setIsLoaded] = useState(false)
     const [result, setResult] = useState([])
     const [loggedIn, setLoggedIn] = useState(false)
+    const [managesGuild, setManagesGuild] = useState(false)
     const [selectedKey, setSelectedKey] = useState('A')
     const [defaultSelectedKey, setDefaultSelectedKey] = useState('A')
+    const inputFile = createRef()
     let page = 0
     let scrollDone = true
 
@@ -53,10 +55,14 @@ export default function Index() {
       )
       }
 
-  fetch(process.env.GATSBY_API_URL + '/levels/' + window.location.pathname.split('/')[2] + '?page=' + page)
+  fetch(process.env.GATSBY_API_URL + '/levels/' + window.location.pathname.split('/')[2] + '?page=' + page, {
+    headers: {
+      'Code': localStorage.getItem('token')
+    }})
     .then(res => res.json())
     .then(result => {
         setResult(result)
+        setManagesGuild(result.managesGuild)
         page++
         setIsLoaded(true)
       }
@@ -96,7 +102,40 @@ if (!isLoaded) {
   return (
     <Layout>
         <Seo title={result.guild.name} />
-    <div className="server-banner">
+    <div className="server-banner" style={{ backgroundImage: "url(" + result.settings.banner + ")" }}>
+          {managesGuild && <button className="changeBanner leftButton" onClick={() => inputFile.current.click()}>📤</button>}
+          {managesGuild && <button className="changeBanner" onClick={() => {
+            fetch(process.env.GATSBY_API_URL + '/settings/' + window.location.pathname.split('/')[2], {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Code': localStorage.getItem('token')
+              },
+              body: JSON.stringify({ banner: "" })
+            })
+            .then(() => {
+                window.location.reload()
+              })
+          }}>🗑</button>}
+          {managesGuild && <input type="file" accept="image/apng, image/avif, image/gif, image/jpeg, image/png, image/svg+xml, image/webp" ref={inputFile} style={{ display: 'none' }} onChange={event => {
+            if(event.target.files[0].type === "image/apng" || event.target.files[0].type === "image/avif" || event.target.files[0].type === "image/gif" || event.target.files[0].type === "image/jpeg" || event.target.files[0].type === "image/png" || event.target.files[0].type === "image/svg+xml" || event.target.files[0].type === "image/webp") {
+            let reader = new FileReader()
+            reader.readAsDataURL(event.target.files[0]) 
+            reader.onloadend = function () {
+            fetch(process.env.GATSBY_API_URL + '/settings/' + window.location.pathname.split('/')[2], {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Code': localStorage.getItem('token')
+              },
+              body: JSON.stringify({ banner: reader.result })
+            })
+            .then(() => {
+                window.location.reload()
+              })
+            }
+          }
+          }} />}
         <div className="actual-content">
           <div style={{display: "flex"}}>
           {result.guild.icon ? <img alt="Server icon" className="profile" src={'https://cdn.discordapp.com/icons/' + window.location.pathname.split('/')[2] + '/' + result.guild.icon + '.png?size=64'}></img> : <div className="profile"><h3>{result.guild.name.split('')[0]}</h3></div>}

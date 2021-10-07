@@ -37,6 +37,7 @@ const Header = ({ siteTitle, menuLinks }) => {
 
           }, [])
 
+          if(typeof window !== "undefined") {
 return (<Navbar id="navbar" bg={window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'} variant={window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'} expand="lg">
 <Container>
   <Navbar.Brand href="/">{siteTitle}</Navbar.Brand>
@@ -73,6 +74,7 @@ return (<Navbar id="navbar" bg={window.matchMedia('(prefers-color-scheme: dark)'
         </DialogFooter>
       </Dialog>
 </Navbar>)
+          }
 }
 
 Header.propTypes = {

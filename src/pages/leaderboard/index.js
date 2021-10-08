@@ -8,30 +8,31 @@ export default function Index() {
   const [result, setResult] = useState([]);
 
   useEffect(() => {
-    if(localStorage.getItem("token")) {
-    fetch(process.env.GATSBY_API_URL + "/commons", {
-      headers: {
-        "Code": localStorage.getItem("token")
-    }})
-    .then(res => res.json())
-    .then(result => {
-        setResult(result)
-        setIsLoaded(true)
-      }
-    )
+    if (localStorage.getItem("token")) {
+      fetch(process.env.GATSBY_API_URL + "/commons", {
+        headers: {
+          "Code": localStorage.getItem("token")
+        }
+      })
+        .then(res => res.json())
+        .then(result => {
+          setResult(result)
+          setIsLoaded(true)
+        }
+        )
     } else {
       setIsLoaded(true)
     }
   }, []);
 
-  if(!isLoaded) {
-  return (
-    <Layout>
-      <Seo title="Leaderboards" />
-      <ProgressIndicator />
-    </Layout>
-  )
-  } else if(localStorage.getItem("token")) {
+  if (!isLoaded) {
+    return (
+      <Layout>
+        <Seo title="Leaderboards" />
+        <ProgressIndicator />
+      </Layout>
+    )
+  } else if (localStorage.getItem("token")) {
     return (
       <Layout>
         <Seo title="Leaderboards" />
@@ -42,11 +43,11 @@ export default function Index() {
     )
   } else {
     return (<Layout>
-        <Seo title="Leaderboards" />
-        <div className="text-center my-4 padding-container">
-          <h2>You have to sign in to see this page.</h2>
-        </div>
-      </Layout>
-      )
+      <Seo title="Leaderboards" />
+      <div className="text-center my-4 padding-container">
+        <h2>You have to sign in to see this page.</h2>
+      </div>
+    </Layout>
+    )
   }
-    }
+}

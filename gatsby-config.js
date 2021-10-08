@@ -4,7 +4,7 @@
  * See: https://www.gatsbyjs.com/docs/gatsby-config/
  */
 
- require("dotenv").config({
+require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
@@ -15,16 +15,16 @@ module.exports = {
     titleTemplate: "%s - Ranker",
     menuLinks: [
       {
-         name: 'Home',
-         link: '/'
+        name: 'Home',
+        link: '/'
       },
       {
         name: 'Leaderboard',
         link: '/leaderboard'
       },
       {
-         name: 'About',
-         link: '/about'
+        name: 'About',
+        link: '/about'
       }
     ]
   },

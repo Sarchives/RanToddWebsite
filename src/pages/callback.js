@@ -7,22 +7,23 @@ import { navigate } from "gatsby-link"
 
 export default function Index() {
 
-    useEffect(() => {
-        const params = new URLSearchParams(window.location.search.substring(1));
-        fetch(process.env.GATSBY_API_URL + "/token", {
-            headers: {
-              "Code": params.get("code")
-            }})
-          .then(res => res.json())
-          .then(result => {
-              if(result.access_token) {
-              localStorage.setItem("token", result.access_token)
-              }
-              navigate(-2)
-            }
-          )
-      
-      }, [])
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search.substring(1));
+    fetch(process.env.GATSBY_API_URL + "/token", {
+      headers: {
+        "Code": params.get("code")
+      }
+    })
+      .then(res => res.json())
+      .then(result => {
+        if (result.access_token) {
+          localStorage.setItem("token", result.access_token)
+        }
+        navigate(-2)
+      }
+      )
+
+  }, [])
 
 
   return (

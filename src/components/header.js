@@ -22,44 +22,44 @@ const Header = ({ siteTitle, menuLinks }) => {
   const [hideDialog, { toggle: toggleHideDialog }] = useBoolean(true)
 
   useEffect(() => {
-  if(localStorage.getItem('token')) {
-  fetch('https://discord.com/api/v9/users/@me', {
-    headers: {
-      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    if (localStorage.getItem('token')) {
+      fetch('https://discord.com/api/v9/users/@me', {
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+      })
+        .then(res => res.json())
+        .then(result => {
+          setLoggedInUser(result)
+        }
+        )
     }
-  })
-            .then(res => res.json())
-            .then(result => {
-                setLoggedInUser(result)
+
+  }, [])
+
+  if (typeof window !== "undefined") {
+    return (<Navbar id="navbar" bg={window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'} variant={window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'} expand="lg">
+      <Container>
+        <Navbar.Brand href="/">{siteTitle}</Navbar.Brand>
+        <Navbar.Toggle aria-controls="navbar" />
+        <Navbar.Collapse id="navbar">
+          <Nav>
+            {menuLinks.map(link => (
+              <Nav.Link href={link.link} key={link.name} active={window.location.pathname === link.link}>{link.name}</Nav.Link>
+            ))}
+            <button className="ms-auto antiButton" onClick={() => {
+              if (!loggedInUser) {
+                navigate("https://discord.com/api/oauth2/authorize?client_id=889281672988749855&redirect_uri=" + encodeURIComponent(window.location.origin + "/") + "callback&response_type=code&scope=guilds%20identify")
+              } else {
+                toggleHideDialog()
               }
-            )
-            }
-
-          }, [])
-
-          if(typeof window !== "undefined") {
-return (<Navbar id="navbar" bg={window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'} variant={window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'} expand="lg">
-<Container>
-  <Navbar.Brand href="/">{siteTitle}</Navbar.Brand>
-  <Navbar.Toggle aria-controls="navbar" />
-  <Navbar.Collapse id="navbar">
-    <Nav>
-    {menuLinks.map(link => (
-        <Nav.Link href={link.link} key={link.name} active={window.location.pathname === link.link}>{link.name}</Nav.Link>
-    ))}
-    <button className="ms-auto antiButton" onClick={() => {
-      if(!loggedInUser) {
-        navigate("https://discord.com/api/oauth2/authorize?client_id=889281672988749855&redirect_uri=" + encodeURIComponent(window.location.origin + "/") + "callback&response_type=code&scope=guilds%20identify")
-      } else {
-        toggleHideDialog()
-      }
-    }}>
-      <img src={loggedInUser ? ("https://cdn.discordapp.com/avatars/" + loggedInUser.id + "/" + loggedInUser.avatar + ".png?size=1024") : "https://cdn.discordapp.com/embed/avatars/1.png"} alt="" className="avatarMenu"></img>
-    </button>
-    </Nav>
-  </Navbar.Collapse>
-</Container>
-<Dialog
+            }}>
+              <img src={loggedInUser ? ("https://cdn.discordapp.com/avatars/" + loggedInUser.id + "/" + loggedInUser.avatar + ".png?size=1024") : "https://cdn.discordapp.com/embed/avatars/1.png"} alt="" className="avatarMenu"></img>
+            </button>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+      <Dialog
         hidden={hideDialog}
         onDismiss={toggleHideDialog}
         dialogContentProps={dialogContentProps}
@@ -73,10 +73,10 @@ return (<Navbar id="navbar" bg={window.matchMedia('(prefers-color-scheme: dark)'
           <DefaultButton onClick={toggleHideDialog} text="Cancel" />
         </DialogFooter>
       </Dialog>
-</Navbar>)
-          } else {
-            return null;
-          }
+    </Navbar>)
+  } else {
+    return null;
+  }
 }
 
 Header.propTypes = {

@@ -17,9 +17,9 @@ const SEO = ({ title }) => {
 
   return (
     <Helmet title={seo.title} titleTemplate={titleTemplate} bodyAttributes={{
-        class: typeof window !== "undefined" && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'bg-dark text-light' : ''
+      class: typeof window !== "undefined" && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'bg-dark text-light' : ''
     }}>
-        <meta charset="UTF-8" />
+      <meta charset="UTF-8" />
     </Helmet>
   )
 }

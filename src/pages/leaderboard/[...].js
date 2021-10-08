@@ -104,7 +104,7 @@ if (!isLoaded) {
         <Seo title={result.guild.name} />
     <div className="server-banner" style={{ backgroundImage: "url(" + result.settings.banner + ")" }}>
           {managesGuild && <button className="changeBanner leftButton" onClick={() => inputFile.current.click()}>📤</button>}
-          {managesGuild && <button className="changeBanner" onClick={() => {
+          {managesGuild && <button className="changeBanner rightButton" onClick={() => {
             fetch(process.env.GATSBY_API_URL + '/settings/' + window.location.pathname.split('/')[2], {
               method: 'POST',
               headers: {

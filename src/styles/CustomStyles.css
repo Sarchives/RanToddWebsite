@@ -70,8 +70,7 @@
 .changeBanner {
     position: absolute;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateY(-50%);
     background: white;
     width: 30px;
     height: 30px;
@@ -81,7 +80,11 @@
 }
 
 .leftButton {
-    left: 48%;
+    left: calc(1rem - 10px);
+}
+
+.rightButton {
+    right: calc(1rem - 10px);
 }
 
 .server-banner:hover .changeBanner {

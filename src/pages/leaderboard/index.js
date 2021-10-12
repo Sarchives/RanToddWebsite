@@ -8,7 +8,6 @@ export default function Index() {
   const [result, setResult] = useState([]);
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
       fetch(process.env.GATSBY_API_URL + "/commons", {
         headers: localStorage.getItem("token") ? {
           "Code": localStorage.getItem("token")
@@ -20,9 +19,6 @@ export default function Index() {
           setIsLoaded(true)
         }
         )
-    } else {
-      setIsLoaded(true)
-    }
   }, []);
 
   if (!isLoaded) {
@@ -32,7 +28,7 @@ export default function Index() {
         <ProgressIndicator />
       </Layout>
     )
-  } else if (localStorage.getItem("token")) {
+  } else {
     return (
       <Layout>
         <Seo title="Leaderboards" />
@@ -40,14 +36,6 @@ export default function Index() {
           {result.map(guild => (<a href={"/leaderboard/" + guild.id} key={guild.id} className="leaderboardLink">{guild.icon ? <img src={"https://cdn.discordapp.com/icons/" + guild.id + "/" + guild.icon + ".png?size=64"} alt={guild.name} className="profile"></img> : <div className="profile"><h3>{guild.name.split("")[0]}</h3></div>}<h4>{guild.name}</h4></a>))}
         </div>
       </Layout>
-    )
-  } else {
-    return (<Layout>
-      <Seo title="Leaderboards" />
-      <div className="text-center my-4 padding-container">
-        <h2>You have to sign in to see this page.</h2>
-      </div>
-    </Layout>
     )
   }
 }

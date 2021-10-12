@@ -38,7 +38,7 @@ const Header = ({ siteTitle, menuLinks }) => {
   }, [])
 
   if (typeof window !== "undefined") {
-    return (<Navbar id="navbar" bg={window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'} variant={window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'} expand="lg">
+    return (<Navbar id="navbar" bg="custom" variant="custom" expand="lg">
       <Container>
         <Navbar.Brand href="/">{siteTitle}</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbar" />

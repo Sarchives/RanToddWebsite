@@ -23,15 +23,6 @@ const Layout = ({ children }) => {
     <>
       <Header menuLinks={data.site.siteMetadata.menuLinks} siteTitle={data.site.siteMetadata.title} />
       <div className="container-fluid">{children}</div>
-      {typeof window !== "undefined" && window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-        if (e.matches) {
-          document.body.classList = 'bg-dark text-light'
-          document.getElementById('navbar').classList = 'navbar navbar-expand-lg navbar-dark bg-dark'
-        } else {
-          document.body.classList = ''
-          document.getElementById('navbar').classList = 'navbar navbar-expand-lg navbar-light bg-light'
-        }
-      })}
     </>
   )
 }

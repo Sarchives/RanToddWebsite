@@ -43,11 +43,6 @@
     display: inline-block;
 }
 
-.bg-dark .leaderboardLink {
-    background-color: #4A4A4A;
-    color: white;
-}
-
 .link {
     background: none;
     border: none;
@@ -143,11 +138,6 @@
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
 }
 
-.bg-dark .playerItem {
-    background-color: #4A4A4A;
-    color: white;
-}
-
 .rankCircle {
     display: inline-block;
     border-radius: 100%;
@@ -226,11 +216,6 @@
     margin-bottom: 1rem;
 }
 
-.bg-dark .roles {
-    background-color: #4A4A4A;
-    color: white;
-}
-
 .role {
     border: 1px solid black;
     border-radius: 5px;
@@ -269,3 +254,112 @@
         margin-left: 1.5rem !important;
     }
 } 
+
+
+/* Navbar */
+
+@media (prefers-color-scheme: light) {
+
+.navbar-custom .navbar-brand {
+    color: rgba(0, 0, 0, 0.9);
+  }
+  .navbar-custom .navbar-brand:hover, .navbar-custom .navbar-brand:focus {
+    color: rgba(0, 0, 0, 0.9);
+  }
+  .navbar-custom .navbar-nav .nav-link {
+    color: rgba(0, 0, 0, 0.55);
+  }
+  .navbar-custom .navbar-nav .nav-link:hover, .navbar-custom .navbar-nav .nav-link:focus {
+    color: rgba(0, 0, 0, 0.7);
+  }
+  .navbar-custom .navbar-nav .nav-link.disabled {
+    color: rgba(0, 0, 0, 0.3);
+  }
+  .navbar-custom .navbar-nav .show > .nav-link,
+  .navbar-custom .navbar-nav .nav-link.active {
+    color: rgba(0, 0, 0, 0.9);
+  }
+  .navbar-custom .navbar-toggler {
+    color: rgba(0, 0, 0, 0.55);
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+  .navbar-custom .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  }
+  .navbar-custom .navbar-text {
+    color: rgba(0, 0, 0, 0.55);
+  }
+  .navbar-custom .navbar-text a,
+  .navbar-custom .navbar-text a:hover,
+  .navbar-custom .navbar-text a:focus {
+    color: rgba(0, 0, 0, 0.9);
+  }
+
+}
+
+  .bg-custom {
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+  }
+
+  
+  @media (prefers-color-scheme: dark) {
+
+  .navbar-custom .navbar-brand {
+    color: #fff;
+  }
+  .navbar-custom .navbar-brand:hover, .navbar-custom .navbar-brand:focus {
+    color: #fff;
+  }
+  .navbar-custom .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.55);
+  }
+  .navbar-custom .navbar-nav .nav-link:hover, .navbar-custom .navbar-nav .nav-link:focus {
+    color: rgba(255, 255, 255, 0.75);
+  }
+  .navbar-custom .navbar-nav .nav-link.disabled {
+    color: rgba(255, 255, 255, 0.25);
+  }
+  .navbar-custom .navbar-nav .show > .nav-link,
+  .navbar-custom .navbar-nav .nav-link.active {
+    color: #fff;
+  }
+  .navbar-custom .navbar-toggler {
+    color: rgba(255, 255, 255, 0.55);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  .navbar-custom .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  }
+  .navbar-custom .navbar-text {
+    color: rgba(255, 255, 255, 0.55);
+  }
+  .navbar-custom .navbar-text a,
+  .navbar-custom .navbar-text a:hover,
+  .navbar-custom .navbar-text a:focus {
+    color: #fff;
+  }
+  .bg-custom {
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+  }
+  .text-body {
+      color: white !important;
+  }
+
+  .playerItem {
+    background-color: #4A4A4A;
+    color: white;
+}
+
+  .leaderboardLink {
+    background-color: #4A4A4A;
+    color: white;
+}
+
+  .roles {
+    background-color: #4A4A4A;
+    color: white;
+}
+}
+  

@@ -15,7 +15,11 @@ export default function Index() {
       })
         .then(res => res.json())
         .then(result => {
+          if(Array.isArray(result)) {
           setResult(result)
+          } else {
+            setResult([result]);
+          }
           setIsLoaded(true)
         }
         )

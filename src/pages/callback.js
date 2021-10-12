@@ -10,9 +10,9 @@ export default function Index() {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search.substring(1));
     fetch(process.env.GATSBY_API_URL + "/token", {
-      headers: {
+      headers: localStorage.getItem("token") ? {
         "Code": params.get("code")
-      }
+      } : {}
     })
       .then(res => res.json())
       .then(result => {

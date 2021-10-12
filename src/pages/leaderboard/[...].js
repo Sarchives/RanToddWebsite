@@ -44,9 +44,9 @@ export default function Index() {
 
     if (localStorage.getItem('token')) {
       fetch(process.env.GATSBY_API_URL + '/style/' + window.location.pathname.split('/')[2], {
-        headers: {
+        headers: localStorage.getItem("token") ? {
           'Code': localStorage.getItem('token')
-        }
+        } : {}
       })
         .then(res => res.json())
         .then(result => {
@@ -57,9 +57,9 @@ export default function Index() {
     }
 
     fetch(process.env.GATSBY_API_URL + '/levels/' + window.location.pathname.split('/')[2] + '?page=' + page, {
-      headers: {
+      headers: localStorage.getItem("token") ? {
         'Code': localStorage.getItem('token')
-      }
+      } : {}
     })
       .then(res => res.json())
       .then(result => {
@@ -109,10 +109,12 @@ export default function Index() {
           {managesGuild && <button className="changeBanner rightButton" onClick={() => {
             fetch(process.env.GATSBY_API_URL + '/settings/' + window.location.pathname.split('/')[2], {
               method: 'POST',
-              headers: {
+              headers: localStorage.getItem("token") ? {
                 'Content-Type': 'application/json',
                 'Code': localStorage.getItem('token')
-              },
+              } : {
+                'Content-Type': 'application/json'
+              }, 
               body: JSON.stringify({ banner: "" })
             })
               .then(() => {
@@ -126,9 +128,11 @@ export default function Index() {
               reader.onloadend = function () {
                 fetch(process.env.GATSBY_API_URL + '/settings/' + window.location.pathname.split('/')[2], {
                   method: 'POST',
-                  headers: {
+                  headers: localStorage.getItem("token") ? {
                     'Content-Type': 'application/json',
                     'Code': localStorage.getItem('token')
+                  } : {
+                    'Content-Type': 'application/json'
                   },
                   body: JSON.stringify({ banner: reader.result })
                 })
@@ -204,10 +208,12 @@ export default function Index() {
             <PrimaryButton onClick={() => {
               fetch(process.env.GATSBY_API_URL + '/style/' + window.location.pathname.split('/')[2], {
                 method: 'POST',
-                headers: {
+                headers: localStorage.getItem("token") ? {
                   'Content-Type': 'application/json',
                   'Code': localStorage.getItem('token')
-                },
+                } : {
+                  'Content-Type': 'application/json'
+                }, 
                 body: JSON.stringify({ fleuron: selectedKey !== 'A' })
               })
                 .then(res => res.json())

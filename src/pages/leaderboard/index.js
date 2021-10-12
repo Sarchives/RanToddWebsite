@@ -10,9 +10,9 @@ export default function Index() {
   useEffect(() => {
     if (localStorage.getItem("token")) {
       fetch(process.env.GATSBY_API_URL + "/commons", {
-        headers: {
+        headers: localStorage.getItem("token") ? {
           "Code": localStorage.getItem("token")
-        }
+        } : {}
       })
         .then(res => res.json())
         .then(result => {

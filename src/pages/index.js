@@ -10,9 +10,9 @@ export default function Index() {
     <Layout>
       <Seo title="Home" />
       <div className="text-center my-4 padding-container">
-        <h2>Rank your Discord server members with Ranker!</h2>
-        <p>Ranker is a ranking Discord bot, it offers a list of members, ordered by XP called leaderboard, it also offers a command to show the rank of a specific user and a system to add roles.</p>
-        <DefaultButton text="GitHub" onClick={() => navigate('https://github.com/Ranker-Team/Ranker')} />
+        <h2>Rank your Discord server members with RanTodd!</h2>
+        <p>RanTodd is a ranking Discord bot, it offers a list of members, ordered by XP called leaderboard, it also offers a command to show the rank of a specific user and a system to add roles.</p>
+        <DefaultButton text="GitHub" onClick={() => navigate('https://github.com/Ranker-Team/RanTodd')} />
       </div>
     </Layout>
   )

@@ -11,8 +11,8 @@ require("dotenv").config({
 module.exports = {
   /* Your site config here */
   siteMetadata: {
-    title: 'Ranker',
-    titleTemplate: "%s - Ranker",
+    title: 'RanTodd',
+    titleTemplate: "%s - RanTodd",
     menuLinks: [
       {
         name: 'Home',

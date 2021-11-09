@@ -1,7 +1,7 @@
 {
-  "name": "ranker-website",
+  "name": "rantodd-website",
   "private": true,
-  "description": "Ranker website",
+  "description": "RanTodd website",
   "version": "0.1.0",
   "license": "0BSD",
   "scripts": {
@@ -29,9 +29,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Ranker-Team/Website"
+    "url": "https://github.com/RanTodd-Team/Website"
   },
   "bugs": {
-    "url": "https://github.com/Ranker-Team/Website/issues"
+    "url": "https://github.com/RanTodd-Team/Website/issues"
   }
 }

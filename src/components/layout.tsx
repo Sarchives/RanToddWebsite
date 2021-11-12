@@ -7,10 +7,14 @@ import { Dialog, DialogType, DialogFooter } from '@fluentui/react/lib/Dialog'
 import { useBoolean } from '@fluentui/react-hooks'
 import { navigate } from 'gatsby-link'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { User } from '../User'
 
 interface LayoutData {
   children: ReactNode;
+}
+
+class User {
+  id: string = ""
+  avatar: string = ""
 }
 
 // 2

@@ -3,26 +3,31 @@ import Layout from "../../components/layout"
 import Seo from '../../components/seo'
 import { ProgressIndicator } from '@fluentui/react/lib/ProgressIndicator'
 
+class CommonsResult {
+  id: string = "";
+  name: string = "";
+  icon: string = "";
+}
+
 export default function Index() {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [result, setResult] = useState([]);
+  const [result, setResult] = useState<CommonsResult[]>([]);
 
   useEffect(() => {
-      fetch(process.env.GATSBY_API_URL + "/commons", {
-        headers: localStorage.getItem("token") ? {
-          "Code": localStorage.getItem("token")
-        } : {}
-      })
-        .then(res => res.json())
-        .then(result => {
-          if(Array.isArray(result)) {
+    fetch(process.env.GATSBY_API_URL + "/commons", {
+      headers: localStorage.getItem("token") ? {
+        "Code": localStorage.getItem("token")!
+      } : {}
+    })
+      .then(res => res.json())
+      .then(result => {
+        if (Array.isArray(result)) {
           setResult(result)
-          } else {
-            setResult([result]);
-          }
-          setIsLoaded(true)
+        } else {
+          setResult([result]);
         }
-        )
+        setIsLoaded(true)
+      })
   }, []);
 
   if (!isLoaded) {

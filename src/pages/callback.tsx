@@ -9,20 +9,19 @@ export default function Index() {
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search.substring(1));
-    fetch(process.env.GATSBY_API_URL + "/token", {
-      headers: localStorage.getItem("token") ? {
-        "Code": params.get("code")
-      } : {}
-    })
-      .then(res => res.json())
-      .then(result => {
-        if (result.access_token) {
-          localStorage.setItem("token", result.access_token)
-        }
-        navigate(-2)
-      }
-      )
-
+    if (localStorage.getItem("token"))
+      fetch(process.env.GATSBY_API_URL + "/token", {
+        headers: localStorage.getItem("token") ? {
+          "Code": params.get("code")!
+        } : {}
+      })
+        .then(res => res.json())
+        .then(result => {
+          if (result.access_token) {
+            localStorage.setItem("token", result.access_token)
+          }
+          navigate(-2)
+        })
   }, [])
 
 

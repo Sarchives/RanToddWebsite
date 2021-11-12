@@ -3,7 +3,11 @@ import PropTypes from 'prop-types'
 import { Helmet } from 'react-helmet'
 import { useStaticQuery, graphql } from 'gatsby'
 
-const SEO = ({ title }) => {
+export class SEOData {
+  title: string | null = null
+}
+
+const SEO = ( data: SEOData ) => {
   const { site } = useStaticQuery(query)
 
   const {
@@ -12,14 +16,14 @@ const SEO = ({ title }) => {
   } = site.siteMetadata
 
   const seo = {
-    title: title || defaultTitle,
+    title: data.title || defaultTitle,
   }
 
   return (
     <Helmet title={seo.title} titleTemplate={titleTemplate} bodyAttributes={{
       class: 'bg-custom text-body'
     }}>
-      <meta charset="UTF-8" />
+      <meta charSet="UTF-8" />
     </Helmet>
   )
 }

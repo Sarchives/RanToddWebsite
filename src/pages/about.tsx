@@ -7,7 +7,7 @@ export default function Index() {
     <Layout>
       <Seo title="About" />
       <div className="my-4">
-        <h2 class="text-center">Who are we?</h2>
+        <h2 className="text-center">Who are we?</h2>
         <div className="padding-container">
           <h3><a href="https://github.com/SapphireDisD">Sapphire</a></h3>
           <p>RanTodd's author.</p>

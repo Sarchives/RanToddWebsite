@@ -11,14 +11,50 @@ import '../../styles/CustomStyles.css'
 import Seo from '../../components/seo'
 import { navigate } from '@reach/router'
 
+class Guild {
+  name: string = "";
+  description: string = "";
+  icon: string = "";
+  is_joinable: boolean = false;
+}
+
+class Settings {
+  banner: string = "";
+  minRange: number = 15;
+  maxRange: number = 25;
+}
+
+class Roles {
+  level: number = 0;
+  roleName: string = "";
+}
+
+class Rank {
+  avatar: string = "";
+  username: string = "";
+  messages: number = 0;
+  totalXp: number = 0;
+  xp: number = 0;
+  nextXp: number = 0;
+  level: number = 0;
+}
+
+class Levels {
+  managesGuild: boolean = false;
+  guild: Guild = new Guild();
+  settings: Settings = new Settings();
+  roles: Roles[] = [];
+  players: Rank[] = [];
+}
+
 export default function Index() {
   const [isLoaded, setIsLoaded] = useState(false)
-  const [result, setResult] = useState([])
+  const [result, setResult] = useState<Levels>()
   const [loggedIn, setLoggedIn] = useState(false)
   const [managesGuild, setManagesGuild] = useState(false)
   const [selectedKey, setSelectedKey] = useState('A')
   const [defaultSelectedKey, setDefaultSelectedKey] = useState('A')
-  const inputFile = createRef()
+  const inputFile = createRef<HTMLInputElement>()
   let page = 0
   let scrollDone = true
 
@@ -45,7 +81,7 @@ export default function Index() {
     if (localStorage.getItem('token')) {
       fetch(process.env.GATSBY_API_URL + '/style/' + window.location.pathname.split('/')[2], {
         headers: localStorage.getItem("token") ? {
-          'Code': localStorage.getItem('token')
+          'Code': localStorage.getItem('token')!
         } : {}
       })
         .then(res => res.json())
@@ -58,7 +94,7 @@ export default function Index() {
 
     fetch(process.env.GATSBY_API_URL + '/levels/' + window.location.pathname.split('/')[2] + '?page=' + page, {
       headers: localStorage.getItem("token") ? {
-        'Code': localStorage.getItem('token')
+        'Code': localStorage.getItem('token')!
       } : {}
     })
       .then(res => res.json())
@@ -103,18 +139,18 @@ export default function Index() {
   } else {
     return (
       <Layout>
-        <Seo title={result.guild.name} />
-        <div className="server-banner" style={{ backgroundImage: "url(" + result.settings.banner + ")" }}>
-          {managesGuild && <button className="changeBanner leftButton" onClick={() => inputFile.current.click()}>📤</button>}
+        <Seo title={result?.guild.name} />
+        <div className="server-banner" style={{ backgroundImage: "url(" + result?.settings.banner + ")" }}>
+          {managesGuild && <button className="changeBanner leftButton" onClick={() => inputFile?.current?.click()}>📤</button>}
           {managesGuild && <button className="changeBanner rightButton" onClick={() => {
             fetch(process.env.GATSBY_API_URL + '/settings/' + window.location.pathname.split('/')[2], {
               method: 'POST',
               headers: localStorage.getItem("token") ? {
                 'Content-Type': 'application/json',
-                'Code': localStorage.getItem('token')
+                'Code': localStorage.getItem('token')!
               } : {
                 'Content-Type': 'application/json'
-              }, 
+              },
               body: JSON.stringify({ banner: "" })
             })
               .then(() => {
@@ -122,15 +158,15 @@ export default function Index() {
               })
           }}>🗑</button>}
           {managesGuild && <input type="file" accept="image/apng, image/avif, image/gif, image/jpeg, image/png, image/svg+xml, image/webp" ref={inputFile} style={{ display: 'none' }} onChange={event => {
-            if (event.target.files[0].type === "image/apng" || event.target.files[0].type === "image/avif" || event.target.files[0].type === "image/gif" || event.target.files[0].type === "image/jpeg" || event.target.files[0].type === "image/png" || event.target.files[0].type === "image/svg+xml" || event.target.files[0].type === "image/webp") {
+            if (event.target.files![0].type === "image/apng" || event.target.files![0].type === "image/avif" || event.target.files![0].type === "image/gif" || event.target.files![0].type === "image/jpeg" || event.target.files![0].type === "image/png" || event.target.files![0].type === "image/svg+xml" || event.target.files![0].type === "image/webp") {
               let reader = new FileReader()
-              reader.readAsDataURL(event.target.files[0])
+              reader.readAsDataURL(event.target.files![0])
               reader.onloadend = function () {
                 fetch(process.env.GATSBY_API_URL + '/settings/' + window.location.pathname.split('/')[2], {
                   method: 'POST',
                   headers: localStorage.getItem("token") ? {
                     'Content-Type': 'application/json',
-                    'Code': localStorage.getItem('token')
+                    'Code': localStorage.getItem('token')!
                   } : {
                     'Content-Type': 'application/json'
                   },
@@ -144,21 +180,20 @@ export default function Index() {
           }} />}
           <div className="actual-content">
             <div style={{ display: "flex" }}>
-              {result.guild.icon ? <img alt="Server icon" className="profile" src={'https://cdn.discordapp.com/icons/' + window.location.pathname.split('/')[2] + '/' + result.guild.icon + '.png?size=64'}></img> : <div className="profile"><h3>{result.guild.name.split('')[0]}</h3></div>}
+              {result?.guild.icon ? <img alt="Server icon" className="profile" src={'https://cdn.discordapp.com/icons/' + window.location.pathname.split('/')[2] + '/' + result.guild.icon + '.png?size=64'}></img> : <div className="profile"><h3>{result?.guild.name.split('')[0]}</h3></div>}
               <div style={{ marginLeft: '20px' }}>
-                <h4 className="leaderboard-server-name">{result.guild.name}</h4>
-                <p className="paragraph" style={{ maxWidth: '600px' }}>{result.guild.description ?? <i>No description</i>}</p>
+                <h4 className="leaderboard-server-name">{result?.guild.name}</h4>
+                <p className="paragraph" style={{ maxWidth: '600px' }}>{result?.guild.description ?? <i>No description</i>}</p>
               </div>
             </div>
             <div id="leaderboard-server-options">
               {loggedIn && <button id="customize-rank-card" style={{ marginRight: '10px' }} className="link" onClick={toggleHideDialog}>Customize your rank card</button>}
-              {result.guild.is_joinable && <PrimaryButton id="leaderboard-join-server" text="Join server" style={{ marginTop: '25px' }} onClick={() => {
+              {result?.guild.is_joinable && <PrimaryButton id="leaderboard-join-server" text="Join server" style={{ marginTop: '25px' }} onClick={() => {
                 fetch(process.env.GATSBY_API_URL + '/invite/' + window.location.pathname.split('/')[2])
                   .then(res => res.json())
                   .then(result => {
                     navigate(result.url)
-                  }
-                  )
+                  })
               }} />}
             </div>
           </div>
@@ -166,10 +201,10 @@ export default function Index() {
         <div className="row">
           <div className="mt-5 ms-3 col roles">
             <h4>Role rewards</h4>
-            {result.roles.map((role, i) => <h6 key={i} className="role">Level {role.level} - {role.roleName}</h6>)}
+            {result?.roles.map((role, i) => <h6 key={i} className="role">Level {role.level} - {role.roleName}</h6>)}
           </div>
           <div className="mt-5 ms-3 col-9 players">
-            {result.players?.map((player, i) => {
+            {result?.players?.map((player, i) => {
               const rank = i + 1
               return (<div key={i} className="playerItem mb-3">
                 <div className={'rankCircle ' + (rank === 1 ? 'gold' : rank === 2 ? 'silver' : rank === 3 ? 'bronce' : 'normal')}>
@@ -203,17 +238,17 @@ export default function Index() {
           dialogContentProps={dialogContentProps}
           modalProps={modelProps}
         >
-          <ChoiceGroup defaultSelectedKey={defaultSelectedKey} options={options} onChange={event => setSelectedKey(event.target.id.slice(event.target.id.length - 1))} />
+          <ChoiceGroup defaultSelectedKey={defaultSelectedKey} options={options} onChange={event => setSelectedKey((event!.target as HTMLElement).id.slice((event!.target as HTMLElement).id.length - 1))} />
           <DialogFooter>
             <PrimaryButton onClick={() => {
               fetch(process.env.GATSBY_API_URL + '/style/' + window.location.pathname.split('/')[2], {
                 method: 'POST',
                 headers: localStorage.getItem("token") ? {
                   'Content-Type': 'application/json',
-                  'Code': localStorage.getItem('token')
+                  'Code': localStorage.getItem('token')!
                 } : {
                   'Content-Type': 'application/json'
-                }, 
+                },
                 body: JSON.stringify({ fleuron: selectedKey !== 'A' })
               })
                 .then(res => res.json())
